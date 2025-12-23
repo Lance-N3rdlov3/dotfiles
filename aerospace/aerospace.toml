@@ -1,0 +1,226 @@
+
+after-startup-command = ['exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=0',
+]
+
+# Start AeroSpace at login
+start-at-login = true
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+# The 'accordion-padding' specifies the size of accordion padding
+# You can set 0 to disable the padding feature
+accordion-padding = 300
+
+# Possible values: tiling|accordion
+default-root-container-layout = 'tiles'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus when focused monitor changes
+# Drop it from your config, if you don't like this behavior
+# See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
+# See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
+# Fallback value (if you omit the key): on-focused-monitor-changed = []
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
+# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
+# Also see: https://nikitabobko.github.io/AeroSpace/goodness#disable-hide-app
+automatically-unhide-macos-hidden-apps = true
+
+
+# Possible values: (qwerty|dvorak)
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
+[key-mapping]
+preset = 'qwerty'
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 30
+outer.right = 10
+# 'main' binding mode declaration
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# 'main' binding mode must be always presented
+[mode.main.binding]
+cmd-h = []     # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
+# All possible keys:
+# - Letters.        a, b, c, ..., z
+# - Numbers.        0, 1, 2, ..., 9
+# - Keypad numbers. keypad0, keypad1, keypad2, ..., keypad9
+# - F-keys.         f1, f2, ..., f20
+# - Special keys.   minus, equal, period, comma, slash, backslash, quote, semicolon, backtick,
+#                   leftSquareBracket, rightSquareBracket, space, enter, esc, backspace, tab
+# - Keypad special. keypadClear, keypadDecimalMark, keypadDivide, keypadEnter, keypadEqual,
+#                   keypadMinus, keypadMultiply, keypadPlus
+# - Arrows.         left, down, up, right
+# i3 wraps focus by default
+  alt-shift-h = 'focus --boundaries-action wrap-around-the-workspace left'
+  alt-shift-j = 'focus --boundaries-action wrap-around-the-workspace down'
+  alt-shift-k = 'focus --boundaries-action wrap-around-the-workspace up'
+  alt-shift-l = 'focus --boundaries-action wrap-around-the-workspace right'
+
+  alt-h = 'move left'
+  alt-j = 'move down'
+  alt-k = 'move up'
+  alt-l = 'move right'
+
+  # Consider using 'join-with' command as a 'split' replacement if you want to enable
+  # normalizations
+  alt-ctrl-j = 'join-with down'
+  alt-ctrl-h = 'join-with left'
+  alt-ctrl-k = 'join-with up'
+  alt-ctrl-l = 'join-with right'
+
+  alt-z = 'fullscreen'
+
+  alt-s = 'layout v_accordion' # 'layout stacking' in i3
+  alt-e = 'layout h_accordion' # 'layout tabbed' in i3
+  alt-w = 'layout tiling horizontal vertical' # 'layout toggle split' in i3
+  alt-b = 'balance-sizes'
+  alt-space = 'layout floating tiling' # 'floating toggle' in i3
+  alt-shift-backspace = 'close-all-windows-but-current --quit-if-last-window'
+  alt-ctrl-r = 'flatten-workspace-tree'
+  # Not supported, because this command is redundant in AeroSpace mental model.
+  # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+  #alt-space = 'focus toggle_tiling_floating'
+
+  # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+  # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+  # alt-a = 'focus parent'
+
+  alt-1 = 'workspace 1'
+  alt-2 = 'workspace 2'
+  alt-3 = 'workspace 3'
+  alt-4 = 'workspace 4'
+  alt-5 = 'workspace 5'
+  alt-6 = 'workspace 6'
+  alt-7 = 'workspace 7'
+  alt-8 = 'workspace 8'
+  alt-9 = 'workspace 9'
+  alt-0 = 'workspace 10'
+
+  alt-shift-1 = 'move-node-to-workspace 1'
+  alt-shift-2 = 'move-node-to-workspace 2'
+  alt-shift-3 = 'move-node-to-workspace 3'
+  alt-shift-4 = 'move-node-to-workspace 4'
+  alt-shift-5 = 'move-node-to-workspace 5'
+  alt-shift-6 = 'move-node-to-workspace 6'
+  alt-shift-7 = 'move-node-to-workspace 7'
+  alt-shift-8 = 'move-node-to-workspace 8'
+  alt-shift-9 = 'move-node-to-workspace 9'
+  alt-shift-0 = 'move-node-to-workspace 10'
+  alt-shift-leftSquareBracket = 'move-node-to-workspace --focus-follows-window prev'
+  alt-shift-rightSquareBracket = 'move-node-to-workspace --focus-follows-window next'
+  alt-shift-r = 'reload-config'
+
+
+alt-shift-t = 'exec-and-forget open -a /Applications/Ghostty.app'
+alt-ctrl-t = 'exec-and-forget open -a /Applications/iTerm.app'
+alt-ctrl-shift-t = 'exec-and-forget open -a /Applications/kitty.app'
+alt-shift-b = 'exec-and-forget open -a /Applications/Safari.app'
+alt-ctrl-b = 'exec-and-forget open -a /Applications/Google Chrome.app'
+alt-shift-o = 'exec-and-forget open -a /Applications/Obsidian.app'
+alt-ctrl-o = 'exec-and-forget open -a /System/Applications/Reminders.app'
+alt-shift-p = 'exec-and-forget open -a /System/Applications/System Settings.app'
+alt-ctrl-p = 'exec-and-forget open -a /System/Applications/App Store.app'
+alt-shift-s = 'exec-and-forget open -a /Applications/Spotify.app'
+alt-ctrl-s = 'exec-and-forget open -a /System/Applications/TV.app'
+alt-ctrl-shift-s = 'exec-and-forget open -a /Applications/Prime Video.app'
+alt-shift-v = 'exec-and-forget open -a /System/Applications/Passwords.app'
+alt-ctrl-v = 'exec-and-forget open -a /Applications/Bitwarden.app'
+
+alt-shift-a = 'exec-and-forget open -a /Users/nrd/Applications/Google Gemini.app'
+alt-shift-c = 'exec-and-forget open -a /Applications/VSCodium.app'
+alt-shift-m = 'exec-and-forget open -a /Users/nrd/Applications/Proton Mail.app'
+alt-ctrl-m = 'exec-and-forget open -a /Applications/Mail.app'
+
+alt-r = 'mode resize'
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+    minus = 'resize smart -50'
+    equal = 'resize smart +50'
+    enter = 'mode main'
+    esc = 'mode main'
+
+## 回调事件: 获取应用的 app-id 和 app-name 可以执行命令 aerospace list-apps
+# 当打开 finder 时，以浮动方式打开
+[[on-window-detected]]
+if.app-name-regex-substring = 'finder'
+run = 'layout floating'
+# 当打开 Shottr 时，以浮动方式打开
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+# [[on-window-detected]]
+# if.app-id = 'com.apple.systempreferences'
+# if.app-name-regex-substring = 'settings'
+# if.window-title-regex-substring = 'substring'
+# if.workspace = 'workspace-name'
+# if.during-aerospace-startup = true
+# check-further-callbacks = true
+# run = ['layout floating', 'move-node-to-workspace S']  # The callback itself
+
+#[[on-window-detected]]
+#if.app-name-regex-substring = 'telegram'
+#run = 'layout tiling'
+
+#[[on-window-detected]]
+#if.app-name-regex-substring = 'finder'
+#run = 'layout floating'
+
+#[[on-window-detected]]
+#if.app-name-regex-substring = 'safari'
+#run = 'layout tiling'
+
+#[[on-window-detected]]
+#if.app-name-regex-substring = 'camera'
+#run = 'layout floating'
+
+#
+#[[on-window-detected]]
+#if.app-name-regex-substring = 'dicord'
+#run = 'layout tiling'
+#
+##[[on-window-detected]]
+##if.app-name-regex-substring = 'mail'
+#run = 'layout tiling'
+#
+##[[on-window-detected]]
+##if.app-name-regex-substring = 'trello'
+#run = 'layout tiling'
+#
+##[[on-window-detected]]
+##if.app-name-regex-substring = 'quicktime'
+#run = 'layout tiling'
+#
+##[[on-window-detected]]
+##if.app-name-regex-substring = 'discord'
+#run = 'layout tiling'

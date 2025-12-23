@@ -1,0 +1,5 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+
+[user]
+name = "Lance-N3rdlov3"
+email = "Nerdlov3@proton.me"
