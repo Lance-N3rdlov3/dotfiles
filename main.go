@@ -15,10 +15,10 @@ import (
 
 // Config holds the configuration for the dotfiles installation
 type Config struct {
-	DotfilesRepo string `json:"dotfiles_repo"`
-	InstallZsh   bool   `json:"install_zsh"`
-	InstallOhMyZsh bool `json:"install_oh_my_zsh"`
-	HomeDir      string `json:"home_dir"`
+	DotfilesRepo   string `json:"dotfiles_repo"`
+	InstallZsh     bool   `json:"install_zsh"`
+	InstallOhMyZsh bool   `json:"install_oh_my_zsh"`
+	HomeDir        string `json:"home_dir"`
 }
 
 // SetupState tracks the installation progress
@@ -81,7 +81,7 @@ func initLogging() error {
 	if err != nil {
 		return err
 	}
-	
+
 	// Log only to file to avoid duplicate output
 	logger = log.New(logFile, "[INSTALLER] ", log.LstdFlags)
 	return nil
@@ -338,7 +338,7 @@ func installOhMyZshPlugins(config *Config) error {
 	customPluginsDir := filepath.Join(config.HomeDir, ".oh-my-zsh", "custom", "plugins")
 
 	plugins := map[string]string{
-		"zsh-autosuggestions":      "https://github.com/zsh-users/zsh-autosuggestions.git",
+		"zsh-autosuggestions":     "https://github.com/zsh-users/zsh-autosuggestions.git",
 		"zsh-syntax-highlighting": "https://github.com/zsh-users/zsh-syntax-highlighting.git",
 	}
 
