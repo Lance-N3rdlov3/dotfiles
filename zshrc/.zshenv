@@ -28,6 +28,11 @@ if [[ -d "$HOME/.local/bin" ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add ~/.local/bin/bear if it exists
+if [[ -d "$HOME/.local/bin/bear" ]]; then
+    export PATH="$HOME/.local/bin/bear:$PATH"
+fi
+
 # Add additional paths
 export PATH="$HOME/bin:$HOME/.var:$HOME/.bin:$HOME/go/bin:$HOME/.pkgx/bin:$PATH"
 
@@ -46,6 +51,9 @@ fi
 if [[ $IS_LINUX -eq 1 ]]; then
     export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 fi
+
+# Terminal configuration
+export TERM=xterm-256color
 
 # Application-specific environment variables
 export OLLAMA_API_BASE=http://127.0.0.1:11434
