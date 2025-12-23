@@ -266,16 +266,27 @@ alias ......='cd ../../../../..'
 # Modern replacements for common tools
 if command -v exa &>/dev/null || command -v eza &>/dev/null; then
     # Use eza if available (exa successor), otherwise exa
-    local ls_cmd=$(command -v eza &>/dev/null && echo "eza" || echo "exa")
+    if command -v eza &>/dev/null; then
+        local ls_cmd="eza"
+    else
+        local ls_cmd="exa"
+    fi
     alias ls="$ls_cmd -aG --color=always --group-directories-first --icons --sort type"
     alias la="$ls_cmd -aG --color=always --group-directories-first --icons"
     alias ll="$ls_cmd -lG --color=always --group-directories-first --icons"
     alias lt="$ls_cmd -aT --color=always --group-directories-first --icons --sort name"
     alias l.="$ls_cmd -ald --color=always --group-directories-first --icons .*"
 else
-    alias ls='ls --color=auto'
-    alias la='ls -A'
-    alias ll='ls -lh'
+    # Fallback to standard ls with basic options
+    if [[ $IS_MACOS -eq 1 ]]; then
+        alias ls='ls -G'
+        alias la='ls -A'
+        alias ll='ls -lh'
+    else
+        alias ls='ls --color=auto'
+        alias la='ls -A'
+        alias ll='ls -lh'
+    fi
 fi
 
 if command -v bat &>/dev/null; then
@@ -363,10 +374,6 @@ fi
 
 # macOS specific aliases
 if [[ $IS_MACOS -eq 1 ]]; then
-    alias ls='ls -G'
-    alias la='ls -A'
-    alias ll='ls -lh'
-    
     # macOS specific utilities
     alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
     alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'

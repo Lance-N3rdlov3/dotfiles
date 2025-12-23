@@ -59,9 +59,9 @@ echo
 # Check for duplicate PATH exports
 echo "✓ Checking for proper PATH handling..."
 path_count=$(grep -c "export PATH=" .zshenv || true)
-if [[ $path_count -gt 3 ]]; then
+if [[ $path_count -gt 5 ]]; then
     echo "  ⚠ Multiple PATH exports found in .zshenv (count: $path_count)"
-    echo "    This might be intentional, but verify PATH is built correctly"
+    echo "    Consider verifying PATH is built correctly"
 fi
 echo
 

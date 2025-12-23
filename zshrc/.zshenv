@@ -29,6 +29,7 @@ if [[ -d "$HOME/.local/bin" ]]; then
 fi
 
 # Add ~/.local/bin/bear if it exists
+# Note: bear is a tool for generating compilation databases
 if [[ -d "$HOME/.local/bin/bear" ]]; then
     export PATH="$HOME/.local/bin/bear:$PATH"
 fi
