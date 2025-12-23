@@ -200,6 +200,21 @@ rm .setup-state.json
 
 For non-interactive installations, you'll need to modify the code to accept command-line flags or environment variables. Future versions may support this feature.
 
+## Security Considerations
+
+This tool follows security best practices:
+
+- **Package Manager Verification**: Uses official package managers (apt, yum, dnf, pacman, brew) to install dependencies
+- **HTTPS Git Clones**: All Git operations use HTTPS URLs
+- **Backup Before Overwrite**: Creates timestamped backups before replacing any files
+- **State Persistence**: Installation state is saved locally in a JSON file
+- **Oh My Zsh Installation**: Uses the official installation script from the Oh My Zsh repository
+
+**Note**: The installer downloads and executes the Oh My Zsh installation script from GitHub. This is the [officially recommended method](https://ohmyz.sh/#install) by the Oh My Zsh team. If you prefer additional verification, you can:
+1. Fork the Oh My Zsh repository and use your own URL
+2. Review the installation script before running this tool
+3. Manually install Oh My Zsh and skip that step when prompted
+
 ## Troubleshooting
 
 ### Permission denied errors

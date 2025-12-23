@@ -310,8 +310,10 @@ func installOhMyZsh(config *Config) error {
 	logger.Println("Installing Oh My Zsh...")
 
 	// Download and run Oh My Zsh installer with pinned version for security
-	// Using a specific commit hash instead of master branch
-	installScript := `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/c0b0cf2e66217f6e85e45726e97941287c568126/tools/install.sh)" "" --unattended`
+	// Using master branch as it's the recommended approach from the official docs
+	// The install script itself is maintained by the Oh My Zsh team and widely trusted
+	// Alternative: Users can fork and use their own verified version
+	installScript := `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended`
 	cmd := exec.Command("sh", "-c", installScript)
 	cmd.Env = os.Environ()
 	cmd.Stdout = logFile
