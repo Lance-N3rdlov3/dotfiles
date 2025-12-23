@@ -59,8 +59,6 @@ export TERM=xterm-256color
 # Application-specific environment variables
 export OLLAMA_API_BASE=http://127.0.0.1:11434
 
-# Mcfly configuration (history search)
-export MCFLY_FUZZY=true
-export MCFLY_RESULTS=20
-export MCFLY_INTERFACE_VIEW=BOTTOM
-export MCFLY_RESULTS_SORT=LAST_RUN
+# Atuin configuration (history search)
+# See: https://github.com/atuinsh/atuin
+export ATUIN_NOBIND="true"

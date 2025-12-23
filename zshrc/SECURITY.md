@@ -13,11 +13,11 @@
 #### 1. Command Execution (`eval`)
 **Findings:**
 - `eval "$(starship init zsh)"` - Line 182 in .zshrc
-- `eval "$(mcfly init zsh)"` - Line 252 in .zshrc
+- `eval "$(atuin init zsh)"` - Line 252 in .zshrc
 
 **Assessment:** ✅ **SAFE**
 - Both commands are protected by `command -v` checks ensuring the tools exist
-- Starship and mcfly are well-known, trusted CLI tools
+- Starship and atuin are well-known, trusted CLI tools
 - No user input is used in the eval statements
 - This is the standard initialization method recommended by both tools
 

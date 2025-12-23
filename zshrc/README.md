@@ -10,7 +10,7 @@ This directory contains a well-organized Zsh configuration that follows best pra
 **Contains**:
 - OS detection (sets `IS_LINUX`, `IS_MACOS`, `IS_HYDE` variables)
 - PATH configuration (with OS-specific paths)
-- Application environment variables (OLLAMA_API_BASE, MCFLY_* settings)
+- Application environment variables (OLLAMA_API_BASE, ATUIN_* settings)
 
 **When loaded**: Always, for all shell types
 
@@ -85,8 +85,8 @@ rm ~/.zshrc.bup  # or from this directory: rm zshrc/.zshrc.bup
 - BSD-style command flags
 
 ### Cross-Platform
-- Modern tool replacements (exa/eza, bat, ugrep)
-- Mcfly history search
+- Modern tool replacements (exa/eza, bat, ripgrep)
+- Atuin history search
 - FZF integration
 - Starship prompt
 - Standard Unix utilities with color support
@@ -99,8 +99,8 @@ Aliases are only created if the required command exists, preventing errors on sy
 ### Modern Tool Support
 - **exa/eza**: Modern `ls` replacement (eza is preferred as exa's successor)
 - **bat**: Better `cat` with syntax highlighting
-- **ugrep**: Better `grep` with Unicode support
-- **mcfly**: Intelligent history search
+- **ripgrep**: Better `grep` with performance improvements
+- **atuin**: Magical shell history
 - **starship**: Fast, customizable prompt
 
 ### Extensive Key Bindings
@@ -124,7 +124,7 @@ Set in `.zshenv` and available to all shells:
 - `IS_MACOS`: 1 if running on macOS, 0 otherwise
 - `IS_HYDE`: 1 if running HyprDE/HyDE, 0 otherwise
 - `OLLAMA_API_BASE`: Ollama API endpoint
-- `MCFLY_*`: Mcfly configuration variables
+- `ATUIN_NOBIND`: Atuin configuration (set to "true" for manual key binding)
 
 ## Customization
 

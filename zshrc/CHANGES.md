@@ -24,7 +24,7 @@ zshrc/
 - **`.zshenv`**: Environment variables loaded for ALL shells
   - PATH configuration
   - OS detection (IS_LINUX, IS_MACOS, IS_HYDE)
-  - Application environment variables (OLLAMA, MCFLY, TERM)
+  - Application environment variables (OLLAMA, ATUIN, TERM)
   
 - **`.zprofile`**: Login shell specific settings
   - Currently sources .zshenv
@@ -52,7 +52,8 @@ zshrc/
 - BSD-style command flags
 
 **Cross-Platform:**
-- Modern tool replacements (exa/eza, bat, mcfly)
+- Modern tool replacements (exa/eza, bat, ripgrep)
+- Atuin history search
 - FZF integration
 - Starship prompt
 
@@ -72,8 +73,8 @@ fi
 #### 5. Modern Tool Support
 - **eza**: Preferred over exa (exa's successor)
 - **bat**: Enhanced cat with syntax highlighting
-- **ugrep**: Better grep with Unicode support
-- **mcfly**: AI-powered history search
+- **ripgrep**: Better grep with performance improvements
+- **atuin**: Magical shell history
 - **starship**: Fast, customizable prompt
 
 ## Migration Guide
@@ -96,7 +97,7 @@ zshrc/.zshrc      # Interactive shell config
 |-------------------|--------------|--------|
 | PATH exports | `.zshenv` | Needed for all shells |
 | OLLAMA_API_BASE | `.zshenv` | Environment variable |
-| MCFLY_* variables | `.zshenv` | Environment variable |
+| ATUIN_* variables | `.zshenv` | Environment variable |
 | TERM | `.zshenv` | Environment variable |
 | setopt commands | `.zshrc` | Interactive only |
 | Completion setup | `.zshrc` | Interactive only |
@@ -184,9 +185,9 @@ Then add to `.zshrc`:
 ### Disabling Features
 Comment out sections you don't need in `.zshrc`:
 ```zsh
-# # Mcfly history search (cross-platform)
-# if command -v mcfly &>/dev/null; then
-#     eval "$(mcfly init zsh)"
+# # Atuin history search (cross-platform)
+# if command -v atuin &>/dev/null; then
+#     eval "$(atuin init zsh)"
 # fi
 ```
 

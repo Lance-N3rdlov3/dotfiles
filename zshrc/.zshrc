@@ -247,9 +247,10 @@ if [[ $IS_MACOS -eq 1 ]]; then
     fi
 fi
 
-# Mcfly history search (cross-platform)
-if command -v mcfly &>/dev/null; then
-    eval "$(mcfly init zsh)"
+# Atuin history search (cross-platform)
+# See: https://github.com/atuinsh/atuin
+if command -v atuin &>/dev/null; then
+    eval "$(atuin init zsh)"
 fi
 
 #
@@ -293,9 +294,17 @@ if command -v bat &>/dev/null; then
     alias cat='bat --style header --style snip --style changes --style header'
 fi
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# Use ripgrep if available, otherwise fall back to standard grep
+if command -v rg &>/dev/null; then
+    alias grep='rg --color=auto'
+    # Note: ripgrep doesn't have fgrep/egrep equivalents, these stay as standard grep
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+else
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # Archive utilities
 alias tarnow='tar -acf'
@@ -315,13 +324,6 @@ alias helpme='cht.sh --shell'
 
 # Linux/Arch specific aliases
 if [[ $IS_LINUX -eq 1 ]]; then
-    # Check for specific commands/tools
-    if command -v ugrep &>/dev/null; then
-        alias grep='ugrep --color=auto'
-        alias fgrep='ugrep -F --color=auto'
-        alias egrep='ugrep -E --color=auto'
-    fi
-
     # Arch/Garuda Linux specific
     if command -v pacman &>/dev/null; then
         alias fixpacman="sudo rm /var/lib/pacman/db.lck"

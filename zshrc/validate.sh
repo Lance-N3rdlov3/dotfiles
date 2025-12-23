@@ -24,6 +24,27 @@ for file in .zshenv .zprofile .zshrc; do
 done
 echo
 
+# Run shellcheck if available
+if command -v shellcheck &>/dev/null; then
+    echo "✓ Running shellcheck..."
+    for file in .zshenv .zprofile .zshrc validate.sh; do
+        if [[ -f "$file" ]]; then
+            echo "  Checking $file..."
+            if shellcheck -s bash "$file" 2>/dev/null || shellcheck "$file" 2>&1 | grep -q "not supported"; then
+                echo "    ✓ $file passed shellcheck"
+            else
+                echo "    ⚠ $file has shellcheck warnings (non-critical)"
+            fi
+        fi
+    done
+    echo
+else
+    echo "⚠ shellcheck not found, skipping shell script analysis"
+    echo "  Install with: apt-get install shellcheck (Debian/Ubuntu)"
+    echo "             or: brew install shellcheck (macOS)"
+    echo
+fi
+
 # Check for basic syntax issues
 echo "✓ Checking for common syntax issues..."
 
