@@ -41,7 +41,12 @@ This directory contains a well-organized Zsh configuration that follows best pra
 **When loaded**: For interactive shells
 
 ### `.zshrc.bup`
-The original backup file. Can be removed after testing the new configuration.
+The original backup file from the previous configuration. This file is kept for reference and can be safely removed after you've tested the new configuration and are satisfied with it.
+
+To remove it:
+```bash
+rm ~/.zshrc.bup  # or from this directory: rm zshrc/.zshrc.bup
+```
 
 ## Installation
 
