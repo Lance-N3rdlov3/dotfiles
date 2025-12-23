@@ -1,0 +1,30 @@
+# https://github.com/FelixKratz/dotfiles
+
+# 监听事件
+sketchybar --add event aerospace_workspace_change
+# 字体
+FONT="Hack Nerd Font"
+# 定义项目目录和插件目录
+ITEM_DIR="$CONFIG_DIR/items"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+
+# 加载颜色
+source "$CONFIG_DIR/colors.sh"
+# 加载图标
+source "$CONFIG_DIR/icons.sh" 
+# 加载初始化设置
+source "$CONFIG_DIR/default.sh"
+
+# 左侧项目 ---
+source "$ITEM_DIR/space.sh"
+# source "$ITEM_DIR/front_app.sh"
+# --- 右侧项目 
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/media_block.sh"
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/ram.sh"
+
+# 热更新
+sketchybar --hotload on
+sketchybar --update
