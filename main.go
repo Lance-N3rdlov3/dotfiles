@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -83,7 +82,8 @@ func initLogging() error {
 		return err
 	}
 	
-	logger = log.New(io.MultiWriter(logFile, os.Stdout), "[INSTALLER] ", log.LstdFlags)
+	// Log only to file to avoid duplicate output
+	logger = log.New(logFile, "[INSTALLER] ", log.LstdFlags)
 	return nil
 }
 
@@ -129,7 +129,10 @@ func getConfiguration() (*Config, error) {
 
 	// Ask for dotfiles repository URL
 	fmt.Print("Enter your dotfiles repository URL (or press Enter for default): ")
-	repo, _ := reader.ReadString('\n')
+	repo, err := reader.ReadString('\n')
+	if err != nil {
+		return nil, fmt.Errorf("failed to read repository URL: %w", err)
+	}
 	repo = strings.TrimSpace(repo)
 	if repo == "" {
 		// Use a sensible default or the user's own repository
@@ -140,13 +143,19 @@ func getConfiguration() (*Config, error) {
 
 	// Ask about Zsh installation
 	fmt.Print("Install Zsh if not present? (Y/n): ")
-	response, _ := reader.ReadString('\n')
+	response, err := reader.ReadString('\n')
+	if err != nil {
+		return nil, fmt.Errorf("failed to read Zsh installation preference: %w", err)
+	}
 	response = strings.TrimSpace(strings.ToLower(response))
 	config.InstallZsh = response == "" || response == "y" || response == "yes"
 
 	// Ask about Oh My Zsh installation
 	fmt.Print("Install Oh My Zsh? (Y/n): ")
-	response, _ = reader.ReadString('\n')
+	response, err = reader.ReadString('\n')
+	if err != nil {
+		return nil, fmt.Errorf("failed to read Oh My Zsh installation preference: %w", err)
+	}
 	response = strings.TrimSpace(strings.ToLower(response))
 	config.InstallOhMyZsh = response == "" || response == "y" || response == "yes"
 
@@ -300,8 +309,9 @@ func installOhMyZsh(config *Config) error {
 
 	logger.Println("Installing Oh My Zsh...")
 
-	// Download and run Oh My Zsh installer
-	installScript := `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended`
+	// Download and run Oh My Zsh installer with pinned version for security
+	// Using a specific commit hash instead of master branch
+	installScript := `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/c0b0cf2e66217f6e85e45726e97941287c568126/tools/install.sh)" "" --unattended`
 	cmd := exec.Command("sh", "-c", installScript)
 	cmd.Env = os.Environ()
 	cmd.Stdout = logFile
@@ -326,7 +336,7 @@ func installOhMyZshPlugins(config *Config) error {
 	customPluginsDir := filepath.Join(config.HomeDir, ".oh-my-zsh", "custom", "plugins")
 
 	plugins := map[string]string{
-		"zsh-autosuggestions": "https://github.com/zsh-users/zsh-autosuggestions",
+		"zsh-autosuggestions":      "https://github.com/zsh-users/zsh-autosuggestions.git",
 		"zsh-syntax-highlighting": "https://github.com/zsh-users/zsh-syntax-highlighting.git",
 	}
 
