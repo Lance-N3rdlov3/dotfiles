@@ -32,3 +32,14 @@ go.work
 # OS files
 .DS_Store
 Thumbs.db
+
+# Application cache directories
+Raindrop.io/Cache/
+Raindrop.io/Code Cache/
+Raindrop.io/GPUCache/
+Raindrop.io/DawnWebGPUCache/
+Raindrop.io/DawnGraphiteCache/
+Raindrop.io/Shared Dictionary/
+Raindrop.io/WebStorage/
+Raindrop.io/Crashpad/
+Raindrop.io/Local Storage/
